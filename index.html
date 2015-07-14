@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>Dallas, My Dallas</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
+    <meta name="viewport" content="width=device-width">
+</head>
+<body>
+<div id="main">
+    <form data-bind="submit: locationSearch">
+       <div id='location-name-info'>
+                <label for="location-name-input" class="info"></label>
+                <input id="location-name-input" /><input type="submit" value="Find" id="submit">
+                <input type="button"  value="Reset Map" data-bind="click: resetMap" />
+       </div>
+    </form>
+
+    <div id="mapDiv">
+        <h2 style="text-align: center;">Dallas, My Dallas</h2>
+        <div id="map"></div>
+    </div>
+
+    <div id="listMessage" data-bind="click: toggleListView">
+        <h5 data-bind="text: listMessage"></h5>
+    </div>
+    <div class="listview" id="listBar" data-bind="visible: showlistView">
+        <div>
+            <ul id="listview-list" data-bind="foreach: locationsInfo">
+                 <li data-bind="click: $parent.displayLocation">
+                    <h4 data-bind="text: name"></h4>
+                    <p class="address" data-bind="html: location"></p>
+                    <p class="listview-id" data-bind="text:id"></p>
+                 </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="mobilebutton" data-bind="click: toggleListView">
+        <i><img src="images/menubar.png"></i>
+    </div>
+</div>
+<script src="js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.2.0.js"></script>
+<script type="text/javascript" src="js/jquery.autocomplete.js"></script>
+<script src="js/map.js"></script>
+</body>
+</html>
