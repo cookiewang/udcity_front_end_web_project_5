@@ -1,0 +1,59 @@
+[
+    {
+        "id":1,
+        "name": "Dallas zoo",
+        "shortName": "Dallas zoo",
+        "geoName":"650 S R L Thornton Freeway Service Rd",
+        "location": "650 S R L Thornton Fwy, Dallas, TX 75203"
+    },
+    {
+        "id":2,
+        "name": "Galleria Dallas",
+        "shortName": "Galleria Dallas",
+        "geoName":"13350 Dallas Pkwy",
+        "location": "13350 Dallas Pkwy, Dallas, TX 75240"
+    },
+    {
+        "id":3,
+        "name": "John F. Kennedy Memorial Plaza",
+        "shortName": "Memorial Plaza",
+        "geoName":"Main St & N Market St",
+        "location": "Main Street and Market Street, Dallas, TX 75202"
+    },
+    {
+        "id":4,
+        "name": "White Rock Lake Park",
+        "shortName": "White Rock Lake",
+        "geoName":"E Lawther Dr",
+        "location": "8300 E. Lawther Drive, Dallas, TX 75218"
+    },
+    {
+        "id":5,
+        "name": "Dallas Arboretum & Botanical Gardens",
+        "shortName": "Botanical Gardens",
+        "geoName":"8525 Garland Rd",
+        "location": "8525 Garland Road, Dallas, TX 75218"
+    },
+
+    {
+        "id":6,
+        "name": "Nasher Sculpture Center",
+        "shortName": "Nasher Sculpture",
+        "geoName":"2001 Flora St",
+        "location": "2001 Flora St., Dallas, TX 75201"
+    },
+    {
+        "id":7,
+        "name": "Perot Museum of Nature and Science",
+        "shortName": "Perot Museum",
+        "geoName":"2201 N Field St",
+        "location": "2201 N. Field Street, Dallas, TX 75201-1704"
+    },
+    {
+        "id":8,
+        "name": "Museum of Biblical Art",
+        "shortName": "Biblical Art",
+        "geoName":"The Museum of Biblical Art",
+        "location": "Biblical Arts Center, Dallas, TX 75225"
+    }
+]
