@@ -1,11 +1,5 @@
 [
-    {
-        "id":1,
-        "name": "Dallas zoo",
-        "shortName": "Dallas zoo",
-        "geoName":"650 S R L Thornton Freeway Service Rd",
-        "location": "650 S R L Thornton Fwy, Dallas, TX 75203"
-    },
+
     {
         "id":2,
         "name": "Galleria Dallas",
