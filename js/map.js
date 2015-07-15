@@ -1,4 +1,5 @@
 // declares global variables
+"use strict";
 var map;
 var locationsName = [];
 var locationsShortName = [];
@@ -10,10 +11,10 @@ var prev_infowindow = false;
  */
 function initializeMap() {
     var self = this;
-    this.locationsInfo = ko.observableArray([]);
-    this.listMessage = ko.observable("Click For Show All The Locations");
-    this.mapMarkers = ko.observableArray([]);
-    this.showlistView = ko.observable(false);
+    self.locationsInfo = ko.observableArray();
+    self.listMessage = ko.observable("Click For Show All The Locations");
+    self.mapMarkers = ko.observableArray();
+    self.showlistView = ko.observable(false);
     var mapOptions = {
         disableDefaultUI: true
     };
@@ -48,14 +49,14 @@ function initializeMap() {
         var locName = "";
         var anchor = "";
         var array = self.locationsInfo();
-        for (var i = 0; i < array.length; i++) {
+        var len = array.length;
+        for (var i = 0; i < len; i++) {
             if (array[i]) {
                 //find the location name if its geoName as same as placeData.name
                 console.info("placeData.name " + placeData.name);
                 if (array[i].geoName == placeData.name) {
                     locName = array[i].name;
                     //call wiki API to get more data for this location
-
                     callingWikiApi('en.wikipedia.org', locName, {
                         ssl: true,
                         success: function (title, link) {
@@ -99,7 +100,7 @@ function initializeMap() {
                             // center the map
                             map.setCenter(bounds.getCenter());
                         },
-                        error : function(XMLHttpRequest, textStats, errorThrown) {
+                        error: function (XMLHttpRequest, textStats, errorThrown) {
                             console.log('Wikipedia error');
                             alert(errorThrown);
                         }
@@ -108,7 +109,7 @@ function initializeMap() {
                 }
             }
         }
-    }
+    };
     //this function is to find the id from locationsInfo
     this.locationSearch = function () {
         var locationShortName = $('#location-name-input').val();
@@ -123,7 +124,7 @@ function initializeMap() {
                 }
             }
         }
-    }
+    };
     //this function to show the clicked marker
     this.displayLocation = function (clickedLocation) {
         console.info(" clickedLocation.id : " + clickedLocation.id);
@@ -146,7 +147,7 @@ function initializeMap() {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
             placeDataInfo.push(results[0]);
         }
-    }
+    };
 
     /*
      pinPoster() fires off Google place searches for each location
@@ -182,11 +183,11 @@ function initializeMap() {
                 }
             },
             error: function () {
-                self.listMessage("No Data Found.")
+                self.listMessage("No Data Found.");
             }
         });
 
-    }
+    };
     //this function calls wikipedia API
     function callingWikiApi(site, search, callback, opts) {
         if (typeof callback == 'object') {
@@ -227,10 +228,10 @@ function initializeMap() {
                 })(titles, links);
             },
             error: function () {
-                self.listMessage("Failed to call WikiApi API.")
+                self.listMessage("Failed to call Wikipedia API.");
             }
         });
-    }
+    };
 
     // Sets the boundaries of the map based on pin locations
     window.mapBounds = new google.maps.LatLngBounds();
@@ -247,29 +248,29 @@ function initializeMap() {
             map.setCenter(center);
             map.fitBounds(mapBounds);
         });
-    }, 2000);
+    }, 1500);
     //this function show/hide the list of locations
     this.toggleListView = function () {
         if (self.showlistView() == false) {
-           // $("#listBar").css({ display: "block" });
             self.showlistView(true);
             self.listMessage("Click For Close The List")
         } else {
-            //$("#listBar").css({ display: "none" });
             self.showlistView(false);
             self.listMessage("Click For Show All The Locations")
         }
-    }
-}
+    };
+};
 // Calls the initializeMap() function when the page loads
-ko.applyBindings(new initializeMap());
+if(!navigator.onLine){
+    window.document.getElementById("main").innerHTML = '<div>' +
+        '<h2>No Internet Connection</h2></div>';
+}else {
+    ko.applyBindings(new initializeMap());
 
 // Vanilla JS way to listen for resizing of the window
 // and adjust map bounds
-window.addEventListener('resize', function (e) {
-    // Make sure the map bounds get updated on page resize
-    map.fitBounds(mapBounds);
-});
-
-
-
+    window.addEventListener('resize', function (e) {
+        // Make sure the map bounds get updated on page resize
+        map.fitBounds(mapBounds);
+    });
+};
