@@ -6,6 +6,7 @@ var locationsShortName = [];
 var locationsAddresses = [];
 var placeDataInfo = [];
 var prev_infowindow = false;
+var currentMarker = null;
 /*
  Start here! initializeMap() is called when page is loaded.
  */
@@ -26,6 +27,13 @@ function initializeMap() {
     this.resetMap = function () {
         if (prev_infowindow) {
             prev_infowindow.close();
+        }
+        var array = self.mapMarkers();
+        array.forEach(function(element){
+            element.marker.setIcon("images/pushpin_red.png");
+        });
+        if(currentMarker){
+            currentMarker.setIcon("images/pushpin_blue.png");
         }
         google.maps.event.trigger(map, 'resize');
     };
@@ -76,6 +84,7 @@ function initializeMap() {
                                     '<p><a href="" target="_blank">No Wikipedia info available</a></p>' +
                                     '</div>';
                             }
+                            marker.setIcon("images/pushpin_red.png");
                             google.maps.event.addListener(marker, 'click', function () {
                                 var infoWindow = new google.maps.InfoWindow({
                                     content: contentInfo
@@ -87,7 +96,11 @@ function initializeMap() {
                                 prev_infowindow = infoWindow;
                                 map.setZoom(14);
                                 map.setCenter(marker.position);
-                                marker.setIcon("images/blueicon.png");
+                                if(currentMarker){
+                                    currentMarker.setIcon("images/pushpin_red.png");
+                                }
+                                marker.setIcon("images/pushpin_blue.png");
+                                currentMarker = marker;
                                 infoWindow.open(map, marker);
                                 map.panBy(0, -150);
                             });
@@ -266,7 +279,6 @@ if(!navigator.onLine){
         '<h2>No Internet Connection</h2></div>';
 }else {
     ko.applyBindings(new initializeMap());
-
 // Vanilla JS way to listen for resizing of the window
 // and adjust map bounds
     window.addEventListener('resize', function (e) {
